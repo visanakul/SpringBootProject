@@ -18,13 +18,13 @@ public class UserController {
 		System.out.println("***::UserController::***");
 	}
 
-	@GetMapping("showRegForm")
+	@GetMapping("register")
 	public String showUserForm(Model model,@ModelAttribute("msg") String msg) {
 		model.addAttribute("user", new User());
 		model.addAttribute("msg", msg);
 		System.out.println("Redirected attribute : "+msg);
 		initUserModel(model);
-		return "userRegistration";
+		return "register";
 	}
 	
 	public void initUserModel(Model model) {
@@ -44,6 +44,19 @@ public class UserController {
 		//initUserModel(model);
 		//model.addAttribute("msg", "Registration Successful...");
 		ra.addFlashAttribute("msg", "Registration Successful...");
-		return "redirect:/showRegForm";
+		return "redirect:/register";
+	}
+	@GetMapping("login")
+	public String showLoginForm(Model model,@ModelAttribute("msg") String msg) {
+		model.addAttribute("user", new User());
+		return "login";
+	}
+	@PostMapping("checkLogInfo")
+	public String checkLoginInfo(@ModelAttribute User user,RedirectAttributes ra) {
+		System.out.println(user);
+		//initUserModel(model);
+		//model.addAttribute("msg", "Registration Successful...");
+		ra.addFlashAttribute("msg", "Login Successful...");
+		return "redirect:/login";
 	}
 }

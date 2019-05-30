@@ -7,13 +7,14 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="css/appstyle.css" >
+<link rel="stylesheet" href="css/register.css">
+<script type="text/javascript" src="js/register_validation.js"></script>
 <body>
 
-	
-	<h1>User Registration</h1>
+
+	<h2>Registration</h2>
 	<h3>${msg}</h3>
-	<form:form action="saveRegInfo" method="POST" modelAttribute="user">
+	<form:form id="regForm" name="regForm" modelAttribute="user">
 		<table>
 			<tbody>
 				<tr>
@@ -46,12 +47,15 @@
 				</tr>
 				<tr>
 					<td>Select Role :</td>
-					<td><form:select path="role" items="${roles}"/></td>
+					<td><form:select path="role" items="${roles}" /></td>
 				</tr>
-				<tr style="display: flex block; background-color: aqua;">
-					<td colspan="2"><input type="reset" value="Reset"
-						style="float: left;" /><input type="submit" value="Register"
-						style="float: right;" /></td>
+				<tr>
+					<td colspan="2">
+						<div class="btn-container">
+							<input type="reset" value="Reset" style="float: left;" /><input
+								type="submit" value="Register" style="float: right;" onclick="regFormValidate();" />
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>
