@@ -7,31 +7,38 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="css/register.css">
-<body>
+<link rel="stylesheet" href="css/login_register.css">
+<body style="padding-top: 50px;">
 
 
 	<h2>Login</h2>
 	<h3>${msg}</h3>
-	<form:form action="checkLogInfo" method="POST" modelAttribute="user">
+	<form:form id="logForm" name="logForm" action="checkLogInfo" method="POST" modelAttribute="login">
 		<table>
 			<tbody>
 
 				<tr>
 					<td>Enter Email :</td>
 					<td><form:input path="email" /></td>
+					<td><form:errors path="email" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>Enter password :</td>
 					<td><form:password path="pass" /></td>
+					<td><form:errors path="pass" cssClass="error" /></td>
 				</tr>
 
 				<tr>
-					<td colspan="2" style="text-align: center;"><input
-						type="submit" value="Login"/></td>
+					<td colspan="2" style="text-align: center;"><input type="submit"
+						value="Login" onclick="logFormValidate();"/></td>
 				</tr>
 			</tbody>
 		</table>
 	</form:form>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/login_validation.js"></script>
 </body>
 </html>

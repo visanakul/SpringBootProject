@@ -48,10 +48,11 @@ input[type='reset'], input[type='submit'] {
 	background-color: black;
 	color: white;
 	font-size: 1rem;
+	outline: none;
 }
 
 input[type='text'], input[type='password'] {
-	border-radius: 20px;
+	border-radius: 8px;
 	padding: 2px 10px;
 	outline: none;
 	line-height: 1rem;
@@ -60,4 +61,12 @@ input[type='text'], input[type='password'] {
 select {
 	padding: 2px;
 	font-size: 0.9rem;
+	border-radius: 8px;
+	outline: none;
+}
+
+form .error {
+	margin-left: 5px; color : #ff0000;
+	font-size: 0.8rem;
+	color: #ff0000;
 }
