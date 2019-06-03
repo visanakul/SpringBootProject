@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,11 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.vishal.web.configure.AppProperties;
 import com.vishal.web.model.Login;
 import com.vishal.web.model.User;
 
 @Controller
 public class UserController {
+	@Autowired
+	private AppProperties config;
+
 	public UserController() {
 		System.out.println("***::UserController::***");
 	}
@@ -29,8 +34,7 @@ public class UserController {
 			System.out.println("Redirected attribute : " + msg);
 			model.addAttribute("msg", msg);
 		}
-		
-		
+
 		initUserModel(model);
 		return "register";
 	}
@@ -45,7 +49,7 @@ public class UserController {
 		roles.add("Admin");
 		roles.add("Case-worker");
 		model.addAttribute("roles", roles);
-		
+
 	}
 
 	@PostMapping("saveRegInfo")
@@ -60,7 +64,8 @@ public class UserController {
 		System.out.println(user);
 		// initUserModel(model);
 		// model.addAttribute("msg", "Registration Successful...");
-		ra.addFlashAttribute("msg", "Registration Successful...");
+		String regSuccess=config.getProperties().get("regSuccess");
+		ra.addFlashAttribute("msg", regSuccess);
 		return "redirect:/register";
 	}
 
@@ -71,13 +76,14 @@ public class UserController {
 	}
 
 	@PostMapping("checkLogInfo")
-	public String checkLoginInfo(@Valid @ModelAttribute Login login,BindingResult bindingResult, RedirectAttributes ra,Model model) {
+	public String checkLoginInfo(@Valid @ModelAttribute Login login, BindingResult bindingResult, RedirectAttributes ra,
+			Model model) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("....Incomplete form....");
 			return "login";
 		}
 		System.out.println(login);
-		//model.addAttribute("login", new Login());
+		// model.addAttribute("login", new Login());
 		ra.addFlashAttribute("msg", "Login Successful...");
 		return "redirect:/login";
 	}
